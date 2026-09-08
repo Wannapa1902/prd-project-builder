@@ -205,7 +205,7 @@ function WorkDetailPage() {
         currentStatus={work.status}
         currentProgress={work.progress}
         userId={user?.id ?? null}
-        userName={user?.user_metadata?.full_name ?? user?.email ?? ""}
+        userName={user?.user_metadata?.["full_name"] ?? user?.email ?? ""}
         onDone={() => {
           qc.invalidateQueries({ queryKey: ["work", workId] });
           qc.invalidateQueries({ queryKey: ["work_updates", workId] });
