@@ -56,7 +56,7 @@ function AuthPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#ECFDF5] px-4 py-10">
+    <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top_left,#FEF9C3_0%,#DCFCE7_42%,#F0FDF4_100%)] px-4 py-10">
       <div className="w-full max-w-md">
         <div className="mb-6 flex flex-col items-center gap-3">
           <div className="flex h-16 w-16 items-center justify-center rounded-[24px] border border-[#BBF7D0] bg-white/80 text-[#15803D] shadow-[0_18px_50px_rgb(34_197_94_/_0.14)] backdrop-blur">
