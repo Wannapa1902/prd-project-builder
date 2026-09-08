@@ -119,7 +119,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
                 })}
                 <Link
                   to="/works/new"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#DCFCE7] to-[#BBF7D0] px-4 py-3 text-sm font-extrabold text-[#2C3E50] shadow-[0_4px_20px_rgb(34_197_94_/_0.4)] transition-all active:scale-95"
+                  className="mt-4 flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#DCFCE7] to-[#BBF7D0] px-4 py-3 text-sm font-extrabold text-[#14532D] shadow-[0_4px_20px_rgb(34_197_94_/_0.4)] transition-all active:scale-95"
                 >
                   <Plus className="h-4 w-4" />
                   เพิ่มงานใหม่
@@ -140,8 +140,8 @@ export function AppLayout({ children }: { children: ReactNode }) {
                             search={{ department }}
                             className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-bold transition-colors ${
                               active
-                                ? "bg-[#F8FAF8] text-[#15803D] shadow-[inset_-5px_0_0_#DCFCE7,0_4px_20px_rgb(34_197_94_/_0.16)]"
-                                : "text-muted-foreground hover:bg-[#F8FAF8] hover:text-[#15803D]"
+                                ? "bg-[#F0FDF4] text-[#15803D] shadow-[inset_-5px_0_0_#DCFCE7,0_4px_20px_rgb(34_197_94_/_0.16)]"
+                                : "text-muted-foreground hover:bg-[#F0FDF4] hover:text-[#15803D]"
                             }`}
                           >
                             <span>{department}</span>

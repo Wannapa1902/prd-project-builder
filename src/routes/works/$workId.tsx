@@ -213,11 +213,11 @@ function WorkDetailPage() {
               </Card>
             )}
             {work.next_action && (
-              <Card className="border-blue-200 bg-blue-50">
+              <Card className="border-green-200 bg-green-50">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm text-blue-700">Action ถัดไป</CardTitle>
+                  <CardTitle className="text-sm text-green-700">Action ถัดไป</CardTitle>
                 </CardHeader>
-                <CardContent className="text-sm text-blue-800">{work.next_action}</CardContent>
+                <CardContent className="text-sm text-green-800">{work.next_action}</CardContent>
               </Card>
             )}
             <Card>

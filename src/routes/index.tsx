@@ -139,7 +139,7 @@ function DashboardPage() {
       label: "กำลังดำเนินการ",
       value: stats.byStatus["in_progress"] ?? 0,
       icon: Clock,
-      cls: "text-blue-600",
+      cls: "text-green-600",
     },
     {
       label: "เสร็จสิ้น",
@@ -261,7 +261,7 @@ function DashboardPage() {
       <div className="grid gap-4">
         <WorkMiniTable
           title="อัพเดทล่าสุด"
-          icon={<Clock className="h-4 w-4 text-blue-600" />}
+          icon={<Clock className="h-4 w-4 text-green-600" />}
           works={filtered.slice(0, 8)}
           empty="ยังไม่มีงาน"
           showUpdate

@@ -144,7 +144,7 @@ function NewWorkPage() {
                     {WORK_TYPES.map((type) => (
                       <label
                         key={type}
-                        className="flex cursor-pointer items-center gap-2 rounded-2xl px-2 py-2 text-sm font-medium text-[#2C3E50] hover:bg-[#F8FAF8]"
+                        className="flex cursor-pointer items-center gap-2 rounded-2xl px-2 py-2 text-sm font-medium text-[#14532D] hover:bg-[#F0FDF4]"
                       >
                         <Checkbox
                           checked={form.work_type === type}

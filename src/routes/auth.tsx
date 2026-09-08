@@ -23,6 +23,8 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const { session, loading } = useSession();
   const navigate = useNavigate();
+  const [showLogin, setShowLogin] = useState(false);
+  const [authTab, setAuthTab] = useState("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -54,28 +56,61 @@ function AuthPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[#ECFDF5] px-4 py-10">
       <div className="w-full max-w-md">
         <div className="mb-6 flex flex-col items-center gap-3">
-          <div className="flex h-16 w-16 -rotate-3 items-center justify-center rounded-[24px] border-2 border-[#15803D] bg-[#DCFCE7] text-[#15803D] shadow-[0_4px_20px_rgb(34_197_94_/_0.4)]">
+          <div className="flex h-16 w-16 items-center justify-center rounded-[24px] border border-[#BBF7D0] bg-white/80 text-[#15803D] shadow-[0_18px_50px_rgb(34_197_94_/_0.14)] backdrop-blur">
             <Factory className="h-8 w-8" />
           </div>
-          <h1 className="text-3xl font-extrabold tracking-wide text-[#15803D]">
+          <h1 className="text-center text-4xl font-medium leading-tight tracking-normal text-[#14532D] [font-family:'Noto_Serif_Thai','Sarabun','Segoe_UI',serif]">
             ระบบอัพเดทงานฝ่ายผลิต
           </h1>
-          <p className="text-center text-sm font-medium text-muted-foreground">
+          <p className="max-w-sm text-center text-sm font-light leading-6 tracking-wide text-[#3F6212]">
             บันทึก ติดตาม และสรุปความคืบหน้างานผลิตและงานทดลอง
           </p>
+          {!showLogin && (
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
+              <Button
+                type="button"
+                className="rounded-full px-8 py-6 text-base font-semibold tracking-wide"
+                onClick={() => {
+                  setAuthTab("signin");
+                  setShowLogin(true);
+                }}
+              >
+                เข้าสู่ระบบ
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="rounded-full bg-white/80 px-8 py-6 text-base font-semibold tracking-wide backdrop-blur"
+                onClick={() => {
+                  setAuthTab("signup");
+                  setShowLogin(true);
+                }}
+              >
+                สมัครสมาชิก
+              </Button>
+            </div>
+          )}
         </div>
-        <Card>
+        <Card
+          className={
+            showLogin
+              ? "border-[#DCFCE7] bg-white/85 shadow-[0_24px_70px_rgb(34_197_94_/_0.14)] backdrop-blur"
+              : "hidden"
+          }
+        >
           <CardHeader>
-            <CardTitle>เข้าสู่ระบบ</CardTitle>
+            <CardTitle className="font-serif text-2xl font-semibold tracking-tight text-[#14532D]">
+              เข้าสู่ระบบ
+            </CardTitle>
             <CardDescription>
               ข้อมูลบัญชีและงานถูกเก็บใน localStorage ของเบราว์เซอร์นี้
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Tabs defaultValue="signin">
+            <Tabs value={authTab} onValueChange={setAuthTab}>
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="signin">เข้าสู่ระบบ</TabsTrigger>
                 <TabsTrigger value="signup">สมัครสมาชิก</TabsTrigger>

@@ -3,7 +3,7 @@ export const STATUSES = [
     value: "not_started",
     label: "รอดำเนินการ",
     color: "#9CA3AF",
-    bg: "bg-[#F8FAF8] text-slate-600",
+    bg: "bg-[#F0FDF4] text-slate-600",
   },
   {
     value: "in_progress",
@@ -15,7 +15,7 @@ export const STATUSES = [
     value: "waiting",
     label: "รอข้อมูล/วัตถุดิบ",
     color: "#DCFCE7",
-    bg: "bg-[#DCFCE7] text-[#2C3E50]",
+    bg: "bg-[#DCFCE7] text-[#14532D]",
   },
   { value: "on_hold", label: "ติดปัญหา", color: "#16A34A", bg: "bg-[#BBF7D0]/20 text-[#15803D]" },
   { value: "completed", label: "เสร็จสิ้น", color: "#27AE60", bg: "bg-green-100 text-green-700" },
@@ -24,8 +24,8 @@ export const STATUSES = [
 
 export const PRIORITIES = [
   { value: "low", label: "ต่ำ", bg: "bg-[#ECFDF5] text-[#15803D]" },
-  { value: "medium", label: "ปานกลาง", bg: "bg-[#F8FAF8] text-[#2C3E50]" },
-  { value: "high", label: "สูง", bg: "bg-[#DCFCE7] text-[#2C3E50]" },
+  { value: "medium", label: "ปานกลาง", bg: "bg-[#F0FDF4] text-[#14532D]" },
+  { value: "high", label: "สูง", bg: "bg-[#DCFCE7] text-[#14532D]" },
   { value: "urgent", label: "เร่งด่วน", bg: "bg-[#16A34A] text-white" },
 ] as const;
 
