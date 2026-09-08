@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as MeetingSummaryRouteImport } from './routes/meeting-summary'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as WorksIndexRouteImport } from './routes/works/index'
 import { Route as WorksWorkIdRouteImport } from './routes/works/$workId'
 import { Route as WorksNewRouteImport } from './routes/works/new'
@@ -23,6 +25,16 @@ const IndexRoute = IndexRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetingSummaryRoute = MeetingSummaryRouteImport.update({
+  id: '/meeting-summary',
+  path: '/meeting-summary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorksIndexRoute = WorksIndexRouteImport.update({
@@ -44,6 +56,8 @@ const WorksNewRoute = WorksNewRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/meeting-summary': typeof MeetingSummaryRoute
+  '/settings': typeof SettingsRoute
   '/works/$workId': typeof WorksWorkIdRoute
   '/works/new': typeof WorksNewRoute
   '/works/': typeof WorksIndexRoute
@@ -51,6 +65,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/meeting-summary': typeof MeetingSummaryRoute
+  '/settings': typeof SettingsRoute
   '/works/$workId': typeof WorksWorkIdRoute
   '/works/new': typeof WorksNewRoute
   '/works': typeof WorksIndexRoute
@@ -59,21 +75,47 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/meeting-summary': typeof MeetingSummaryRoute
+  '/settings': typeof SettingsRoute
   '/works/$workId': typeof WorksWorkIdRoute
   '/works/new': typeof WorksNewRoute
   '/works/': typeof WorksIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/works/$workId' | '/works/new' | '/works/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/meeting-summary'
+    | '/settings'
+    | '/works/$workId'
+    | '/works/new'
+    | '/works/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/works/$workId' | '/works/new' | '/works'
-  id: '__root__' | '/' | '/auth' | '/works/$workId' | '/works/new' | '/works/'
+  to:
+    | '/'
+    | '/auth'
+    | '/meeting-summary'
+    | '/settings'
+    | '/works/$workId'
+    | '/works/new'
+    | '/works'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/meeting-summary'
+    | '/settings'
+    | '/works/$workId'
+    | '/works/new'
+    | '/works/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  MeetingSummaryRoute: typeof MeetingSummaryRoute
+  SettingsRoute: typeof SettingsRoute
   WorksWorkIdRoute: typeof WorksWorkIdRoute
   WorksNewRoute: typeof WorksNewRoute
   WorksIndexRoute: typeof WorksIndexRoute
@@ -93,6 +135,20 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meeting-summary': {
+      id: '/meeting-summary'
+      path: '/meeting-summary'
+      fullPath: '/meeting-summary'
+      preLoaderRoute: typeof MeetingSummaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/works/': {
@@ -122,6 +178,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  MeetingSummaryRoute: MeetingSummaryRoute,
+  SettingsRoute: SettingsRoute,
   WorksWorkIdRoute: WorksWorkIdRoute,
   WorksNewRoute: WorksNewRoute,
   WorksIndexRoute: WorksIndexRoute,
