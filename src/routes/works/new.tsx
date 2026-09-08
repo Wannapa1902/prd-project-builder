@@ -140,11 +140,11 @@ function NewWorkPage() {
                 </div>
                 <div className="space-y-2">
                   <Label>ประเภทงาน *</Label>
-                  <div className="space-y-2 rounded-3xl border-2 border-[#E8F6F5] bg-white p-3">
+                  <div className="space-y-2 rounded-3xl border-2 border-[#ECFDF5] bg-white p-3">
                     {WORK_TYPES.map((type) => (
                       <label
                         key={type}
-                        className="flex cursor-pointer items-center gap-2 rounded-2xl px-2 py-2 text-sm font-medium text-[#2C3E50] hover:bg-[#FFF8E7]"
+                        className="flex cursor-pointer items-center gap-2 rounded-2xl px-2 py-2 text-sm font-medium text-[#2C3E50] hover:bg-[#F8FAF8]"
                       >
                         <Checkbox
                           checked={form.work_type === type}
@@ -194,7 +194,7 @@ function NewWorkPage() {
                   onChange={(e) => readAttachment(e.target.files?.[0], "image")}
                 />
                 {form.image_url && (
-                  <div className="overflow-hidden rounded-3xl border-2 border-[#E8F6F5] bg-white p-2 shadow-[0_4px_20px_rgb(43_168_162_/_0.12)]">
+                  <div className="overflow-hidden rounded-3xl border-2 border-[#ECFDF5] bg-white p-2 shadow-[0_4px_20px_rgb(34_197_94_/_0.12)]">
                     <img
                       src={form.image_url}
                       alt={form.image_name || "รูปภาพแนบ"}

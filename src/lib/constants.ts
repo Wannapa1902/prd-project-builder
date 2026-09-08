@@ -3,30 +3,30 @@ export const STATUSES = [
     value: "not_started",
     label: "รอดำเนินการ",
     color: "#9CA3AF",
-    bg: "bg-[#FFF8E7] text-slate-600",
+    bg: "bg-[#F8FAF8] text-slate-600",
   },
   {
     value: "in_progress",
     label: "กำลังดำเนินการ",
-    color: "#2BA8A2",
-    bg: "bg-[#E8F6F5] text-[#1E8C86]",
+    color: "#22C55E",
+    bg: "bg-[#ECFDF5] text-[#15803D]",
   },
   {
     value: "waiting",
     label: "รอข้อมูล/วัตถุดิบ",
-    color: "#FFD23F",
-    bg: "bg-[#FFE47A] text-[#2C3E50]",
+    color: "#DCFCE7",
+    bg: "bg-[#DCFCE7] text-[#2C3E50]",
   },
-  { value: "on_hold", label: "ติดปัญหา", color: "#EF6C4A", bg: "bg-[#FF8A6A]/20 text-[#D45233]" },
+  { value: "on_hold", label: "ติดปัญหา", color: "#16A34A", bg: "bg-[#BBF7D0]/20 text-[#15803D]" },
   { value: "completed", label: "เสร็จสิ้น", color: "#27AE60", bg: "bg-green-100 text-green-700" },
   { value: "cancelled", label: "ยกเลิก", color: "#BDC3C7", bg: "bg-gray-100 text-gray-500" },
 ] as const;
 
 export const PRIORITIES = [
-  { value: "low", label: "ต่ำ", bg: "bg-[#E8F6F5] text-[#1E8C86]" },
-  { value: "medium", label: "ปานกลาง", bg: "bg-[#FFF8E7] text-[#2C3E50]" },
-  { value: "high", label: "สูง", bg: "bg-[#FFE47A] text-[#2C3E50]" },
-  { value: "urgent", label: "เร่งด่วน", bg: "bg-[#EF6C4A] text-white" },
+  { value: "low", label: "ต่ำ", bg: "bg-[#ECFDF5] text-[#15803D]" },
+  { value: "medium", label: "ปานกลาง", bg: "bg-[#F8FAF8] text-[#2C3E50]" },
+  { value: "high", label: "สูง", bg: "bg-[#DCFCE7] text-[#2C3E50]" },
+  { value: "urgent", label: "เร่งด่วน", bg: "bg-[#16A34A] text-white" },
 ] as const;
 
 export const DEPARTMENTS = ["ผลิต 1", "ผลิต 2", "ผลิต 3", "ผลิต 4", "ผลิต 5", "LDI"];

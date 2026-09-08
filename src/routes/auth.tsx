@@ -57,10 +57,10 @@ function AuthPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-md">
         <div className="mb-6 flex flex-col items-center gap-3">
-          <div className="flex h-16 w-16 -rotate-3 items-center justify-center rounded-[24px] border-2 border-[#1E8C86] bg-[#FFD23F] text-[#1E8C86] shadow-[0_4px_20px_rgb(255_210_63_/_0.4)]">
+          <div className="flex h-16 w-16 -rotate-3 items-center justify-center rounded-[24px] border-2 border-[#15803D] bg-[#DCFCE7] text-[#15803D] shadow-[0_4px_20px_rgb(34_197_94_/_0.4)]">
             <Factory className="h-8 w-8" />
           </div>
-          <h1 className="text-3xl font-extrabold tracking-wide text-[#1E8C86]">
+          <h1 className="text-3xl font-extrabold tracking-wide text-[#15803D]">
             ระบบอัพเดทงานฝ่ายผลิต
           </h1>
           <p className="text-center text-sm font-medium text-muted-foreground">

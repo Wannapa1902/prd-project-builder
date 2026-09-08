@@ -10,14 +10,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gradient-to-br from-[#FFD23F] to-[#E6B800] text-[#2C3E50] shadow-[0_4px_20px_rgb(255_210_63_/_0.4)] hover:brightness-105",
+          "bg-gradient-to-br from-[#DCFCE7] to-[#BBF7D0] text-[#2C3E50] shadow-[0_4px_20px_rgb(34_197_94_/_0.4)] hover:brightness-105",
         destructive:
-          "bg-[#EF6C4A] text-destructive-foreground shadow-[0_4px_20px_rgb(239_108_74_/_0.35)] hover:bg-[#D45233]",
+          "bg-[#16A34A] text-destructive-foreground shadow-[0_4px_20px_rgb(34_197_94_/_0.35)] hover:bg-[#15803D]",
         outline:
-          "border-2 border-primary bg-white text-primary shadow-[0_4px_20px_rgb(43_168_162_/_0.18)] hover:bg-[#E8F6F5]",
+          "border-2 border-primary bg-white text-primary shadow-[0_4px_20px_rgb(34_197_94_/_0.18)] hover:bg-[#ECFDF5]",
         secondary:
-          "bg-[#FFF8E7] text-secondary-foreground shadow-[0_4px_20px_rgb(43_168_162_/_0.1)] hover:bg-[#FFE47A]",
-        ghost: "text-muted-foreground hover:bg-[#E8F6F5] hover:text-[#1E8C86]",
+          "bg-[#F8FAF8] text-secondary-foreground shadow-[0_4px_20px_rgb(34_197_94_/_0.1)] hover:bg-[#DCFCE7]",
+        ghost: "text-muted-foreground hover:bg-[#ECFDF5] hover:text-[#15803D]",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

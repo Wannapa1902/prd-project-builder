@@ -151,7 +151,7 @@ function DashboardPage() {
 
   return (
     <AppLayout>
-      <div className="mb-6 rounded-[32px] bg-gradient-to-br from-[#2BA8A2] to-[#1E8C86] p-6 text-white shadow-[0_4px_20px_rgb(43_168_162_/_0.3)]">
+      <div className="mb-6 rounded-[32px] bg-gradient-to-br from-[#22C55E] to-[#15803D] p-6 text-white shadow-[0_4px_20px_rgb(34_197_94_/_0.3)]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="mb-2 inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
@@ -162,7 +162,7 @@ function DashboardPage() {
           </div>
           <div className="rounded-3xl border-2 border-white/25 bg-black/15 px-5 py-3 text-right">
             <div className="text-xs font-bold text-white/70">งานทั้งหมด</div>
-            <div className="text-4xl font-extrabold text-[#FFD23F]">{stats.total}</div>
+            <div className="text-4xl font-extrabold text-[#DCFCE7]">{stats.total}</div>
           </div>
         </div>
         <div className="mt-5 flex flex-wrap gap-2">
@@ -200,7 +200,7 @@ function DashboardPage() {
           <Card key={c.label}>
             <CardContent className="pt-4">
               <c.icon className={`mb-2 h-5 w-5 ${c.cls}`} />
-              <div className="text-3xl font-extrabold text-[#1E8C86]">{c.value}</div>
+              <div className="text-3xl font-extrabold text-[#15803D]">{c.value}</div>
               <div className="text-xs font-bold text-muted-foreground">{c.label}</div>
             </CardContent>
           </Card>
@@ -250,7 +250,7 @@ function DashboardPage() {
                   <XAxis dataKey="name" tick={{ fontSize: 11 }} />
                   <YAxis allowDecimals={false} />
                   <Tooltip />
-                  <Bar dataKey="value" name="จำนวนงาน" fill="#2BA8A2" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="value" name="จำนวนงาน" fill="#22C55E" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             )}

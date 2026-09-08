@@ -46,7 +46,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background p-4 text-foreground md:p-8">
-      <div className="mx-auto min-h-[calc(100vh-2rem)] max-w-7xl overflow-hidden rounded-[32px] border-4 border-white bg-card shadow-[0_24px_70px_rgb(43_168_162_/_0.18)] md:min-h-[calc(100vh-4rem)]">
+      <div className="mx-auto min-h-[calc(100vh-2rem)] max-w-7xl overflow-hidden rounded-[32px] border-4 border-white bg-card shadow-[0_24px_70px_rgb(34_197_94_/_0.18)] md:min-h-[calc(100vh-4rem)]">
         <header className="flex flex-wrap items-center justify-between gap-4 border-b border-sidebar-border bg-white px-6 py-4">
           <div className="flex items-center gap-2.5">
             <Button
@@ -71,14 +71,14 @@ export function AppLayout({ children }: { children: ReactNode }) {
             >
               <Presentation className="h-4 w-4" />
             </Button>
-            <div className="flex h-10 w-10 -rotate-3 items-center justify-center rounded-2xl border-2 border-[#1E8C86] bg-[#FFD23F] text-[#1E8C86] shadow-[0_4px_20px_rgb(255_210_63_/_0.4)]">
+            <div className="flex h-10 w-10 -rotate-3 items-center justify-center rounded-2xl border-2 border-[#15803D] bg-[#DCFCE7] text-[#15803D] shadow-[0_4px_20px_rgb(34_197_94_/_0.4)]">
               <Boxes className="h-4 w-4" />
             </div>
             <div>
-              <div className="text-sm font-extrabold leading-tight tracking-wide text-[#1E8C86]">
+              <div className="text-sm font-extrabold leading-tight tracking-wide text-[#15803D]">
                 ProdFlow
               </div>
-              <div className="text-xs font-bold text-[#EF6C4A]">Production</div>
+              <div className="text-xs font-bold text-[#16A34A]">Production</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -108,7 +108,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
                       to={item.to}
                       className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-bold transition-colors ${
                         active
-                          ? "bg-[#E8F6F5] text-[#1E8C86] shadow-[inset_-5px_0_0_#FFD23F,0_4px_20px_rgb(43_168_162_/_0.14)]"
+                          ? "bg-[#ECFDF5] text-[#15803D] shadow-[inset_-5px_0_0_#DCFCE7,0_4px_20px_rgb(34_197_94_/_0.14)]"
                           : "text-muted-foreground hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground"
                       }`}
                     >
@@ -119,14 +119,14 @@ export function AppLayout({ children }: { children: ReactNode }) {
                 })}
                 <Link
                   to="/works/new"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#FFD23F] to-[#E6B800] px-4 py-3 text-sm font-extrabold text-[#2C3E50] shadow-[0_4px_20px_rgb(255_210_63_/_0.4)] transition-all active:scale-95"
+                  className="mt-4 flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#DCFCE7] to-[#BBF7D0] px-4 py-3 text-sm font-extrabold text-[#2C3E50] shadow-[0_4px_20px_rgb(34_197_94_/_0.4)] transition-all active:scale-95"
                 >
                   <Plus className="h-4 w-4" />
                   เพิ่มงานใหม่
                 </Link>
                 {presentSidebarOpen && (
                   <div className="mt-5 border-t border-sidebar-border pt-4">
-                    <div className="mb-3 flex items-center gap-2 px-2 text-sm font-extrabold text-[#1E8C86]">
+                    <div className="mb-3 flex items-center gap-2 px-2 text-sm font-extrabold text-[#15803D]">
                       <Presentation className="h-4 w-4" />
                       Work Presentation
                     </div>
@@ -140,8 +140,8 @@ export function AppLayout({ children }: { children: ReactNode }) {
                             search={{ department }}
                             className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-bold transition-colors ${
                               active
-                                ? "bg-[#FFF8E7] text-[#1E8C86] shadow-[inset_-5px_0_0_#FFD23F,0_4px_20px_rgb(255_210_63_/_0.16)]"
-                                : "text-muted-foreground hover:bg-[#FFF8E7] hover:text-[#1E8C86]"
+                                ? "bg-[#F8FAF8] text-[#15803D] shadow-[inset_-5px_0_0_#DCFCE7,0_4px_20px_rgb(34_197_94_/_0.16)]"
+                                : "text-muted-foreground hover:bg-[#F8FAF8] hover:text-[#15803D]"
                             }`}
                           >
                             <span>{department}</span>
@@ -155,7 +155,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
               </nav>
             </aside>
           )}
-          <main className="min-w-0 flex-1 bg-[#EFF8F7] p-6 lg:p-8">{children}</main>
+          <main className="min-w-0 flex-1 bg-[#F6FBF7] p-6 lg:p-8">{children}</main>
         </div>
       </div>
     </div>

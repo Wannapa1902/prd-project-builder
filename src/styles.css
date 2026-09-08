@@ -63,38 +63,38 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.97 0.018 186);
+  --background: oklch(0.98 0.018 145);
   --foreground: oklch(0.24 0.03 240);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.24 0.03 240);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.24 0.03 240);
-  --primary: oklch(0.65 0.11 191);
+  --primary: oklch(0.62 0.14 145);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.985 0.034 91);
+  --secondary: oklch(0.97 0.035 145);
   --secondary-foreground: oklch(0.24 0.03 240);
-  --muted: oklch(0.98 0.02 91);
+  --muted: oklch(0.97 0.018 145);
   --muted-foreground: oklch(0.54 0.03 230);
-  --accent: oklch(0.89 0.16 91);
+  --accent: oklch(0.9 0.08 145);
   --accent-foreground: oklch(0.24 0.03 240);
   --destructive: oklch(0.67 0.18 35);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.89 0.025 186);
-  --input: oklch(0.95 0.028 91);
-  --ring: oklch(0.75 0.1 225);
-  --chart-1: oklch(0.65 0.11 191);
-  --chart-2: oklch(0.89 0.16 91);
-  --chart-3: oklch(0.67 0.18 35);
-  --chart-4: oklch(0.72 0.12 225);
-  --chart-5: oklch(0.66 0.14 147);
+  --border: oklch(0.9 0.025 145);
+  --input: oklch(0.94 0.026 145);
+  --ring: oklch(0.68 0.12 145);
+  --chart-1: oklch(0.62 0.14 145);
+  --chart-2: oklch(0.74 0.12 145);
+  --chart-3: oklch(0.82 0.08 145);
+  --chart-4: oklch(0.52 0.11 145);
+  --chart-5: oklch(0.9 0.05 145);
   --sidebar: oklch(1 0 0);
   --sidebar-foreground: oklch(0.24 0.03 240);
-  --sidebar-primary: oklch(0.65 0.11 191);
+  --sidebar-primary: oklch(0.62 0.14 145);
   --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.985 0.034 91);
-  --sidebar-accent-foreground: oklch(0.54 0.12 191);
-  --sidebar-border: oklch(0.91 0.025 186);
-  --sidebar-ring: oklch(0.65 0.11 191);
+  --sidebar-accent: oklch(0.97 0.035 145);
+  --sidebar-accent-foreground: oklch(0.45 0.12 145);
+  --sidebar-border: oklch(0.9 0.025 145);
+  --sidebar-ring: oklch(0.62 0.14 145);
 }
 
 .dark {
@@ -149,7 +149,7 @@
   }
 
   .flip-card-accent::before {
-    background: linear-gradient(180deg, #3cc4bd, #2ba8a2);
+    background: linear-gradient(180deg, #86efac, #22c55e);
     border-radius: 999px;
     bottom: 18px;
     content: "";
@@ -161,8 +161,8 @@
 
   .flip-section-title {
     align-items: center;
-    border-bottom: 2px dashed #2ba8a2;
-    color: #1e8c86;
+    border-bottom: 2px dashed #22c55e;
+    color: #15803d;
     display: flex;
     font-weight: 800;
     gap: 0.5rem;

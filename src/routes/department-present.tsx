@@ -96,7 +96,7 @@ function DepartmentPresentPage() {
   return (
     <AppLayout>
       <div className="space-y-6">
-        <section className="rounded-[32px] bg-gradient-to-br from-[#2BA8A2] to-[#1E8C86] p-6 text-white shadow-[0_4px_20px_rgb(43_168_162_/_0.3)]">
+        <section className="rounded-[32px] bg-gradient-to-br from-[#22C55E] to-[#15803D] p-6 text-white shadow-[0_4px_20px_rgb(34_197_94_/_0.3)]">
           <p className="mb-2 inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-bold">
             Department Presentation
           </p>
@@ -111,7 +111,7 @@ function DepartmentPresentPage() {
             </div>
             <div className="rounded-3xl border-2 border-white/25 bg-black/15 px-5 py-3 text-right">
               <div className="text-xs font-bold text-white/70">ความคืบหน้าเฉลี่ย</div>
-              <div className="text-4xl font-extrabold text-[#FFD23F]">{stats.averageProgress}%</div>
+              <div className="text-4xl font-extrabold text-[#DCFCE7]">{stats.averageProgress}%</div>
             </div>
           </div>
         </section>
@@ -216,10 +216,10 @@ function StatCard({ label, value, icon }: { label: string; value: number; icon: 
     <Card>
       <CardContent className="flex items-center justify-between pt-4">
         <div>
-          <div className="text-3xl font-extrabold text-[#1E8C86]">{value}</div>
+          <div className="text-3xl font-extrabold text-[#15803D]">{value}</div>
           <div className="text-xs font-bold text-muted-foreground">{label}</div>
         </div>
-        <div className="rounded-2xl bg-[#E8F6F5] p-3 text-[#1E8C86]">{icon}</div>
+        <div className="rounded-2xl bg-[#ECFDF5] p-3 text-[#15803D]">{icon}</div>
       </CardContent>
     </Card>
   );
