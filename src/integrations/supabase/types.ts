@@ -14,16 +14,217 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          created_at: string
+          department: string | null
+          display_name: string | null
+          email: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          department?: string | null
+          display_name?: string | null
+          email?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string
+          department?: string | null
+          display_name?: string | null
+          email?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      work_types: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      work_updates: {
+        Row: {
+          attachment_url: string | null
+          created_at: string
+          detail: string
+          id: string
+          issue: string | null
+          next_action: string | null
+          progress: number | null
+          status: string
+          updated_by: string | null
+          updated_by_name: string | null
+          work_id: string
+        }
+        Insert: {
+          attachment_url?: string | null
+          created_at?: string
+          detail: string
+          id?: string
+          issue?: string | null
+          next_action?: string | null
+          progress?: number | null
+          status: string
+          updated_by?: string | null
+          updated_by_name?: string | null
+          work_id: string
+        }
+        Update: {
+          attachment_url?: string | null
+          created_at?: string
+          detail?: string
+          id?: string
+          issue?: string | null
+          next_action?: string | null
+          progress?: number | null
+          status?: string
+          updated_by?: string | null
+          updated_by_name?: string | null
+          work_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "work_updates_work_id_fkey"
+            columns: ["work_id"]
+            isOneToOne: false
+            referencedRelation: "works"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      works: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          department: string | null
+          description: string | null
+          due_date: string | null
+          id: string
+          latest_issue: string | null
+          latest_update: string | null
+          next_action: string | null
+          owner_id: string | null
+          owner_name: string | null
+          priority: string
+          product_lot: string | null
+          progress: number
+          remark: string | null
+          start_date: string | null
+          status: string
+          title: string
+          updated_at: string
+          work_no: number
+          work_type: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          department?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          latest_issue?: string | null
+          latest_update?: string | null
+          next_action?: string | null
+          owner_id?: string | null
+          owner_name?: string | null
+          priority?: string
+          product_lot?: string | null
+          progress?: number
+          remark?: string | null
+          start_date?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+          work_no?: never
+          work_type: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          department?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          latest_issue?: string | null
+          latest_update?: string | null
+          next_action?: string | null
+          owner_id?: string | null
+          owner_name?: string | null
+          priority?: string
+          product_lot?: string | null
+          progress?: number
+          remark?: string | null
+          start_date?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+          work_no?: never
+          work_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "works_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "staff" | "supervisor" | "viewer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +351,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "staff", "supervisor", "viewer"],
+    },
   },
 } as const
