@@ -1,20 +1,37 @@
 export const STATUSES = [
-  { value: "not_started", label: "รอดำเนินการ", color: "#64748b", bg: "bg-slate-100 text-slate-700" },
-  { value: "in_progress", label: "กำลังดำเนินการ", color: "#2563eb", bg: "bg-blue-100 text-blue-700" },
-  { value: "waiting", label: "รอข้อมูล/วัตถุดิบ", color: "#d97706", bg: "bg-amber-100 text-amber-700" },
-  { value: "on_hold", label: "ติดปัญหา", color: "#dc2626", bg: "bg-red-100 text-red-700" },
-  { value: "completed", label: "เสร็จสิ้น", color: "#16a34a", bg: "bg-green-100 text-green-700" },
-  { value: "cancelled", label: "ยกเลิก", color: "#9ca3af", bg: "bg-gray-100 text-gray-500" },
+  {
+    value: "not_started",
+    label: "รอดำเนินการ",
+    color: "#9CA3AF",
+    bg: "bg-[#FFF8E7] text-slate-600",
+  },
+  {
+    value: "in_progress",
+    label: "กำลังดำเนินการ",
+    color: "#2BA8A2",
+    bg: "bg-[#E8F6F5] text-[#1E8C86]",
+  },
+  {
+    value: "waiting",
+    label: "รอข้อมูล/วัตถุดิบ",
+    color: "#FFD23F",
+    bg: "bg-[#FFE47A] text-[#2C3E50]",
+  },
+  { value: "on_hold", label: "ติดปัญหา", color: "#EF6C4A", bg: "bg-[#FF8A6A]/20 text-[#D45233]" },
+  { value: "completed", label: "เสร็จสิ้น", color: "#27AE60", bg: "bg-green-100 text-green-700" },
+  { value: "cancelled", label: "ยกเลิก", color: "#BDC3C7", bg: "bg-gray-100 text-gray-500" },
 ] as const;
 
 export const PRIORITIES = [
-  { value: "low", label: "ต่ำ", bg: "bg-slate-100 text-slate-600" },
-  { value: "medium", label: "ปานกลาง", bg: "bg-sky-100 text-sky-700" },
-  { value: "high", label: "สูง", bg: "bg-orange-100 text-orange-700" },
-  { value: "urgent", label: "เร่งด่วน", bg: "bg-red-100 text-red-700" },
+  { value: "low", label: "ต่ำ", bg: "bg-[#E8F6F5] text-[#1E8C86]" },
+  { value: "medium", label: "ปานกลาง", bg: "bg-[#FFF8E7] text-[#2C3E50]" },
+  { value: "high", label: "สูง", bg: "bg-[#FFE47A] text-[#2C3E50]" },
+  { value: "urgent", label: "เร่งด่วน", bg: "bg-[#EF6C4A] text-white" },
 ] as const;
 
-export const DEPARTMENTS = ["ฝ่ายผลิต", "ฝ่ายวิจัยและพัฒนา", "ฝ่ายคุณภาพ", "ฝ่ายวิศวกรรม", "ฝ่ายจัดซื้อ", "อื่น ๆ"];
+export const DEPARTMENTS = ["ผลิต 1", "ผลิต 2", "ผลิต 3", "ผลิต 4", "ผลิต 5", "LDI"];
+
+export const WORK_TYPES = ["ปัญหางานผลิต", "งานทดลอง", "อัพเดทงาน/อื่น"] as const;
 
 export function statusLabel(v: string) {
   return STATUSES.find((s) => s.value === v)?.label ?? v;
@@ -34,7 +51,11 @@ export function priorityBg(v: string) {
 
 export function formatDate(d?: string | null) {
   if (!d) return "-";
-  return new Date(d).toLocaleDateString("th-TH", { year: "numeric", month: "short", day: "numeric" });
+  return new Date(d).toLocaleDateString("th-TH", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 }
 export function formatDateTime(d?: string | null) {
   if (!d) return "-";

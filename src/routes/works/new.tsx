@@ -1,23 +1,32 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { AppLayout } from "@/components/app-layout";
 import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@/hooks/use-session";
-import { STATUSES, PRIORITIES, DEPARTMENTS } from "@/lib/constants";
+import { DEPARTMENTS, STATUSES, WORK_TYPES } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/works/new")({
   head: () => ({
     meta: [
       { title: "เพิ่มงานใหม่ | ระบบอัพเดทงานฝ่ายผลิต" },
-      { name: "description", content: "สร้างงานใหม่สำหรับฝ่ายผลิต ระบุประเภทงาน ผู้รับผิดชอบ และกำหนดเสร็จ" },
+      {
+        name: "description",
+        content: "สร้างงานใหม่สำหรับฝ่ายผลิต ระบุประเภทงาน แผนก และสถานะเริ่มต้น",
+      },
     ],
   }),
   component: NewWorkPage,
@@ -31,63 +40,74 @@ function NewWorkPage() {
     title: "",
     description: "",
     work_type: "",
-    product_lot: "",
-    owner_id: "",
     department: "",
-    start_date: "",
-    due_date: "",
-    priority: "medium",
     status: "not_started",
+    image_url: "",
+    image_name: "",
+    attachment_url: "",
+    attachment_name: "",
     remark: "",
-  });
-
-  const { data: profiles } = useQuery({
-    queryKey: ["profiles"],
-    queryFn: async () => {
-      const { data } = await supabase.from("profiles").select("id, display_name, email").order("display_name");
-      return data ?? [];
-    },
-  });
-  const { data: workTypes } = useQuery({
-    queryKey: ["work_types"],
-    queryFn: async () => {
-      const { data } = await supabase.from("work_types").select("name").eq("is_active", true).order("sort_order");
-      return data ?? [];
-    },
   });
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
+  function readAttachment(file: File | undefined, kind: "image" | "file") {
+    if (!file) {
+      setForm((f) => ({
+        ...f,
+        ...(kind === "image"
+          ? { image_url: "", image_name: "" }
+          : { attachment_url: "", attachment_name: "" }),
+      }));
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setForm((f) => ({
+        ...f,
+        ...(kind === "image"
+          ? { image_url: String(reader.result ?? ""), image_name: file.name }
+          : { attachment_url: String(reader.result ?? ""), attachment_name: file.name }),
+      }));
+    };
+    reader.onerror = () => toast.error("อ่านไฟล์แนบไม่สำเร็จ");
+    reader.readAsDataURL(file);
+  }
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.title.trim() || !form.work_type || !form.owner_id) {
-      toast.error("กรุณากรอกหัวข้องาน ประเภทงาน และผู้รับผิดชอบ");
+    if (!form.title.trim() || !form.work_type) {
+      toast.error("กรุณากรอกหัวข้องานและประเภทงาน");
       return;
     }
     setBusy(true);
-    const owner = profiles?.find((p) => p.id === form.owner_id);
     const { data, error } = await supabase
       .from("works")
       .insert({
         title: form.title.trim(),
         description: form.description || null,
         work_type: form.work_type,
-        product_lot: form.product_lot || null,
-        owner_id: form.owner_id,
-        owner_name: owner?.display_name || owner?.email || null,
+        product_lot: null,
+        owner_id: null,
+        owner_name: null,
         department: form.department || null,
-        start_date: form.start_date || null,
-        due_date: form.due_date || null,
-        priority: form.priority,
+        start_date: null,
+        due_date: null,
+        priority: "medium",
         status: form.status,
+        image_url: form.image_url || null,
+        image_name: form.image_name || null,
+        attachment_url: form.attachment_url || null,
+        attachment_name: form.attachment_name || null,
         remark: form.remark || null,
         created_by: user?.id ?? null,
       })
       .select("id")
       .single();
     setBusy(false);
-    if (error) {
-      toast.error("บันทึกไม่สำเร็จ: " + error.message);
+    if (error || !data) {
+      toast.error("บันทึกไม่สำเร็จ: " + (error?.message ?? "ไม่พบรหัสงานที่สร้าง"));
     } else {
       toast.success("เพิ่มงานใหม่เรียบร้อย");
       navigate({ to: "/works/$workId", params: { workId: data.id } });
@@ -109,62 +129,44 @@ function NewWorkPage() {
                 <Label>หัวข้องาน *</Label>
                 <Input value={form.title} onChange={(e) => set("title", e.target.value)} required />
               </div>
-              <div className="space-y-1.5 md:col-span-2">
-                <Label>รายละเอียดงาน</Label>
-                <Textarea rows={3} value={form.description} onChange={(e) => set("description", e.target.value)} />
-              </div>
-              <div className="space-y-1.5">
-                <Label>ประเภทงาน *</Label>
-                <Select value={form.work_type} onValueChange={(v) => set("work_type", v)}>
-                  <SelectTrigger><SelectValue placeholder="เลือกประเภทงาน" /></SelectTrigger>
-                  <SelectContent>
-                    {workTypes?.map((t) => (
-                      <SelectItem key={t.name} value={t.name}>{t.name}</SelectItem>
+              <div className="grid gap-4 md:col-span-2 md:grid-cols-[minmax(0,1fr)_260px]">
+                <div className="space-y-1.5">
+                  <Label>รายละเอียดงาน</Label>
+                  <Textarea
+                    rows={5}
+                    value={form.description}
+                    onChange={(e) => set("description", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>ประเภทงาน *</Label>
+                  <div className="space-y-2 rounded-3xl border-2 border-[#E8F6F5] bg-white p-3">
+                    {WORK_TYPES.map((type) => (
+                      <label
+                        key={type}
+                        className="flex cursor-pointer items-center gap-2 rounded-2xl px-2 py-2 text-sm font-medium text-[#2C3E50] hover:bg-[#FFF8E7]"
+                      >
+                        <Checkbox
+                          checked={form.work_type === type}
+                          onCheckedChange={() => set("work_type", type)}
+                        />
+                        <span>{type}</span>
+                      </label>
                     ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-1.5">
-                <Label>สินค้า / รุ่น / Lot</Label>
-                <Input value={form.product_lot} onChange={(e) => set("product_lot", e.target.value)} />
-              </div>
-              <div className="space-y-1.5">
-                <Label>ผู้รับผิดชอบ *</Label>
-                <Select value={form.owner_id} onValueChange={(v) => set("owner_id", v)}>
-                  <SelectTrigger><SelectValue placeholder="เลือกผู้รับผิดชอบ" /></SelectTrigger>
-                  <SelectContent>
-                    {profiles?.map((p) => (
-                      <SelectItem key={p.id} value={p.id}>{p.display_name || p.email}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  </div>
+                </div>
               </div>
               <div className="space-y-1.5">
                 <Label>แผนกที่เกี่ยวข้อง</Label>
                 <Select value={form.department} onValueChange={(v) => set("department", v)}>
-                  <SelectTrigger><SelectValue placeholder="เลือกแผนก" /></SelectTrigger>
+                  <SelectTrigger>
+                    <SelectValue placeholder="เลือกแผนก" />
+                  </SelectTrigger>
                   <SelectContent>
                     {DEPARTMENTS.map((d) => (
-                      <SelectItem key={d} value={d}>{d}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-1.5">
-                <Label>วันที่เริ่มงาน</Label>
-                <Input type="date" value={form.start_date} onChange={(e) => set("start_date", e.target.value)} />
-              </div>
-              <div className="space-y-1.5">
-                <Label>วันที่กำหนดเสร็จ</Label>
-                <Input type="date" value={form.due_date} onChange={(e) => set("due_date", e.target.value)} />
-              </div>
-              <div className="space-y-1.5">
-                <Label>ความสำคัญ</Label>
-                <Select value={form.priority} onValueChange={(v) => set("priority", v)}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    {PRIORITIES.map((p) => (
-                      <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>
+                      <SelectItem key={d} value={d}>
+                        {d}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -172,21 +174,63 @@ function NewWorkPage() {
               <div className="space-y-1.5">
                 <Label>สถานะเริ่มต้น</Label>
                 <Select value={form.status} onValueChange={(v) => set("status", v)}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
                   <SelectContent>
                     {STATUSES.map((s) => (
-                      <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
+                      <SelectItem key={s.value} value={s.value}>
+                        {s.label}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-1.5 md:col-span-2">
+                <Label>แนบรูปภาพ</Label>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => readAttachment(e.target.files?.[0], "image")}
+                />
+                {form.image_url && (
+                  <div className="overflow-hidden rounded-3xl border-2 border-[#E8F6F5] bg-white p-2 shadow-[0_4px_20px_rgb(43_168_162_/_0.12)]">
+                    <img
+                      src={form.image_url}
+                      alt={form.image_name || "รูปภาพแนบ"}
+                      className="max-h-72 w-full rounded-2xl object-contain"
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="space-y-1.5 md:col-span-2">
+                <Label>แนบไฟล์</Label>
+                <Input
+                  type="file"
+                  accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt"
+                  onChange={(e) => readAttachment(e.target.files?.[0], "file")}
+                />
+                {form.attachment_name && (
+                  <p className="text-xs font-medium text-muted-foreground">
+                    ไฟล์ที่เลือก: {form.attachment_name}
+                  </p>
+                )}
+              </div>
+              <div className="space-y-1.5 md:col-span-2">
                 <Label>หมายเหตุ</Label>
-                <Textarea rows={2} value={form.remark} onChange={(e) => set("remark", e.target.value)} />
+                <Textarea
+                  rows={2}
+                  value={form.remark}
+                  onChange={(e) => set("remark", e.target.value)}
+                />
               </div>
               <div className="flex gap-2 md:col-span-2">
-                <Button type="submit" disabled={busy}>{busy ? "กำลังบันทึก..." : "บันทึกงานใหม่"}</Button>
-                <Button type="button" variant="outline" onClick={() => navigate({ to: "/works" })}>ยกเลิก</Button>
+                <Button type="submit" disabled={busy}>
+                  {busy ? "กำลังบันทึก..." : "บันทึกงานใหม่"}
+                </Button>
+                <Button type="button" variant="outline" onClick={() => navigate({ to: "/works" })}>
+                  ยกเลิก
+                </Button>
               </div>
             </form>
           </CardContent>

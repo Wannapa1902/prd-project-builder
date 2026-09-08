@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as DepartmentPresentRouteImport } from './routes/department-present'
 import { Route as MeetingSummaryRouteImport } from './routes/meeting-summary'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as WorksIndexRouteImport } from './routes/works/index'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DepartmentPresentRoute = DepartmentPresentRouteImport.update({
+  id: '/department-present',
+  path: '/department-present',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MeetingSummaryRoute = MeetingSummaryRouteImport.update({
@@ -56,6 +62,7 @@ const WorksNewRoute = WorksNewRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/department-present': typeof DepartmentPresentRoute
   '/meeting-summary': typeof MeetingSummaryRoute
   '/settings': typeof SettingsRoute
   '/works/$workId': typeof WorksWorkIdRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/department-present': typeof DepartmentPresentRoute
   '/meeting-summary': typeof MeetingSummaryRoute
   '/settings': typeof SettingsRoute
   '/works/$workId': typeof WorksWorkIdRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/department-present': typeof DepartmentPresentRoute
   '/meeting-summary': typeof MeetingSummaryRoute
   '/settings': typeof SettingsRoute
   '/works/$workId': typeof WorksWorkIdRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/department-present'
     | '/meeting-summary'
     | '/settings'
     | '/works/$workId'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/department-present'
     | '/meeting-summary'
     | '/settings'
     | '/works/$workId'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/auth'
+    | '/department-present'
     | '/meeting-summary'
     | '/settings'
     | '/works/$workId'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  DepartmentPresentRoute: typeof DepartmentPresentRoute
   MeetingSummaryRoute: typeof MeetingSummaryRoute
   SettingsRoute: typeof SettingsRoute
   WorksWorkIdRoute: typeof WorksWorkIdRoute
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/department-present': {
+      id: '/department-present'
+      path: '/department-present'
+      fullPath: '/department-present'
+      preLoaderRoute: typeof DepartmentPresentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/meeting-summary': {
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  DepartmentPresentRoute: DepartmentPresentRoute,
   MeetingSummaryRoute: MeetingSummaryRoute,
   SettingsRoute: SettingsRoute,
   WorksWorkIdRoute: WorksWorkIdRoute,
