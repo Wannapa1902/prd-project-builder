@@ -81,7 +81,7 @@ function NewWorkPage() {
         priority: form.priority,
         status: form.status,
         remark: form.remark || null,
-        created_by: user?.id,
+        created_by: user?.id ?? null,
       })
       .select("id")
       .single();
